@@ -1,10 +1,11 @@
 #pragma once
 
-template <typename ParserType>
+template <typename ParserType, typename LexerType>
 bool
 RLoader::ParseFile ()
 {
-        ParserType parser (this);
+        LexerType lexer;
+        ParserType parser (this, &lexer);
     
     return parser.Parse ();
 }

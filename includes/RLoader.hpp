@@ -18,12 +18,13 @@ public:
     template <typename ParserType>
     bool        ParseFile               ();
 
+    int         ReadAndAdvance  ();
+
 private:
-
-    int         InternalReadAndAdvance  ();
-
     
     int         vCursor;
     RString     vFilePath;
     FILE*       vHandle;
 };
+
+#include "RLoader.hxx"

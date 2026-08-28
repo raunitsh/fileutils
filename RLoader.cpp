@@ -41,17 +41,8 @@ RLoader::CloseFile ()
     vFilePath.SetString ("");
 }
 
-template<typename ParserType>
-bool
-RLoader::ParseFile ()
-{
-        ParserType parser;
-
-    return parser.Parse ();
-}
-
 int
-RLoader::InternalReadAndAdvance ()
+RLoader::ReadAndAdvance ()
 {
     return fgetc (vHandle);
 }

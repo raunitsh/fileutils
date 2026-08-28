@@ -5,12 +5,22 @@ RLoader::RLoader ()
 {
     vFilePath.SetString ("");
     vHandle = nullptr;
-    vCursor = -1;
+    vFileBuffer = nullptr;
+    vCursor = 0;
+    vBytesRead = 0;
 }
 
 RLoader::~RLoader ()
 {
+    if (vFileBuffer)
+    {
+        delete[] vFileBuffer;
+    }
 
+    vCursor = 0;
+    vBytesRead = 0;
+    vFileBuffer = nullptr;
+    vHandle = nullptr;
 }
 
 void
@@ -23,11 +33,15 @@ bool
 RLoader::OpenFileRO ()
 {    
     vHandle = fopen (vFilePath.GetPointer (), "rb");    
+    vFileBuffer = new char [FILE_BUFF_SIZE];
 
-    if (!vHandle)
+    if (!vHandle || !vFileBuffer)
     {
         return false;
     }
+
+    vCursor = 0;
+    vBytesRead = 0;
 
     return true;
 }
@@ -40,15 +54,32 @@ RLoader::CloseFile ()
         fclose (vHandle);
         vHandle = nullptr;
     }
-    vCursor = -1;
+
+    if (vFileBuffer)
+    {
+        delete[] vFileBuffer;
+        vFileBuffer = nullptr;
+    }
+
+    vCursor = 0;
+    vBytesRead = 0;
     vFilePath.SetString ("");
 }
 
 int
 RLoader::ReadAndAdvance ()
 {
-    if (!vHandle)
+    if (!vHandle || !vFileBuffer)
         return EOF;
 
-    return fgetc (vHandle);
+    if (vCursor >= vBytesRead)
+    {
+        vBytesRead = fread (vFileBuffer, 1, FILE_BUFF_SIZE, vHandle);
+        vCursor = 0;
+
+        if (vBytesRead == 0)
+            return EOF;
+    }
+
+    return (unsigned char) vFileBuffer [vCursor++];
 }

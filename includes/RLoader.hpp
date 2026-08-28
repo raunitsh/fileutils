@@ -4,6 +4,8 @@
 
 #include <cstdio>
 
+#define         FILE_BUFF_SIZE          16 // 16B
+
 class RLoader {
 
 public:
@@ -18,13 +20,16 @@ public:
     template <typename ParserType>
     bool        ParseFile               ();
 
-    int         ReadAndAdvance  ();
+    int         ReadAndAdvance          ();
 
 private:
     
-    int         vCursor;
     RString     vFilePath;
     FILE*       vHandle;
+
+    size_t      vCursor;
+    size_t      vBytesRead;
+    char*       vFileBuffer;
 };
 
 #include "RLoader.hxx"

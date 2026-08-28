@@ -35,8 +35,11 @@ RLoader::OpenFileRO ()
 void
 RLoader::CloseFile ()
 {
-    fclose (vHandle);
-    vHandle = nullptr;
+    if (vHandle)
+    {
+        fclose (vHandle);
+        vHandle = nullptr;
+    }
     vCursor = -1;
     vFilePath.SetString ("");
 }
@@ -44,5 +47,8 @@ RLoader::CloseFile ()
 int
 RLoader::ReadAndAdvance ()
 {
+    if (!vHandle)
+        return EOF;
+
     return fgetc (vHandle);
 }

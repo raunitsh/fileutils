@@ -20,7 +20,7 @@ public:
     template <typename ParserType>
     bool        ParseFile               ();
 
-    int         ReadAndAdvance          ();
+    int         ReadByteAndAdvance          ();
 
 private:
     

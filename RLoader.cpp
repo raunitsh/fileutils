@@ -67,7 +67,7 @@ RLoader::CloseFile ()
 }
 
 int
-RLoader::ReadAndAdvance ()
+RLoader::ReadByteAndAdvance ()
 {
     if (!vHandle || !vFileBuffer)
         return EOF;

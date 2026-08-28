@@ -14,26 +14,19 @@ FetchContent_Declare(
     GIT_TAG        main # or a specific release/commit
 )
 
-# 2. Declare memorymanager dependency
-FetchContent_Declare(
-    memorymanager
-    GIT_REPOSITORY https://github.com/raunitsh/memorymanager.git
-    GIT_TAG        main # or a specific release/commit
-)
-
 # Populate and make both targets available
-FetchContent_MakeAvailable(cpputils memorymanager)
+FetchContent_MakeAvailable(cpputils)
 
 # 3. Your executable / library target
-add_executable(fileutils
+add_library(fileutils
     # List your source files here, e.g.:
     Loader.cpp
-    main.cpp
 )
+
+add_library(fileutils::fileutils ALIAS fileutils)
 
 # 4. Link dependencies
 # cpputils automatically provides its includes and C++17 compile features
 target_link_libraries(fileutils PRIVATE
     cpputils::cpputils
-    memorymanager::memorymanager
 )

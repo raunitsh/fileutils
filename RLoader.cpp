@@ -1,26 +1,26 @@
-#include "includes/Loader.hpp"
+#include "RLoader.hpp"
 
 
-Loader::Loader ()
+RLoader::RLoader ()
 {
     vFilePath.SetString ("");
     vHandle = nullptr;
     vCursor = -1;
 }
 
-Loader::~Loader ()
+RLoader::~RLoader ()
 {
 
 }
 
 void
-Loader::SetFilePath (RString& pFilePath)
+RLoader::SetFilePath (RString& pFilePath)
 {
     vFilePath.SetString (pFilePath.GetPointer ());
 }
 
 bool
-Loader::OpenFileRO ()
+RLoader::OpenFileRO ()
 {    
     vHandle = fopen (vFilePath.GetPointer (), "rb");    
 
@@ -33,7 +33,7 @@ Loader::OpenFileRO ()
 }
 
 void
-Loader::CloseFile ()
+RLoader::CloseFile ()
 {
     fclose (vHandle);
     vHandle = nullptr;
@@ -43,7 +43,7 @@ Loader::CloseFile ()
 
 template<typename ParserType>
 bool
-Loader::ParseFile ()
+RLoader::ParseFile ()
 {
         ParserType parser;
 
@@ -51,7 +51,7 @@ Loader::ParseFile ()
 }
 
 int
-Loader::InternalReadAndAdvance ()
+RLoader::InternalReadAndAdvance ()
 {
     return fgetc (vHandle);
 }

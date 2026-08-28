@@ -1,15 +1,15 @@
 #pragma once
 
-#include "datatypes/RString.hpp"
+#include "RCppUtilsLib.hpp"
 
 #include <cstdio>
 
-class Loader {
+class RLoader {
 
 public:
 
-                Loader                  ();
-                ~Loader                 ();
+                RLoader                 ();
+                ~RLoader                ();
 
     bool        OpenFileRO              ();
     void        CloseFile               ();

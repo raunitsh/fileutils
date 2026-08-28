@@ -25,6 +25,11 @@ add_library(fileutils
 
 add_library(fileutils::fileutils ALIAS fileutils)
 
+target_include_directories(fileutils PUBLIC
+    $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/includes>
+    $<INSTALL_INTERFACE:include>
+)
+
 # 4. Link dependencies
 # cpputils automatically provides its includes and C++17 compile features
 target_link_libraries(fileutils PRIVATE

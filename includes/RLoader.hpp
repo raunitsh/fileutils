@@ -17,7 +17,7 @@ public:
     void        CloseFile               ();
     void        SetFilePath             (RString& pFilePath);
 
-    template <typename ParserType, typename LexerType>
+    template <typename ParserType>
     bool        ParseFile               ();
 
     template <typename ResultType>

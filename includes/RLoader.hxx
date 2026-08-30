@@ -9,3 +9,10 @@ RLoader::ParseFile ()
     
     return parser.Parse ();
 }
+
+template <typename ResultType>
+ResultType
+RLoader::GetParserResult ()
+{
+    return (ResultType) vParserResult;
+}

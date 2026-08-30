@@ -83,3 +83,9 @@ RLoader::ReadByteAndAdvance ()
 
     return (unsigned char) vFileBuffer [vCursor++];
 }
+
+void
+RLoader::SetParserResult (void * pParserResult)
+{
+    vParserResult = pParserResult;
+}

@@ -20,16 +20,21 @@ public:
     template <typename ParserType, typename LexerType>
     bool        ParseFile               ();
 
-    int         ReadByteAndAdvance          ();
+    template <typename ResultType>
+    ResultType  GetParserResult         ();
+
+    int         ReadByteAndAdvance      ();
+    void        SetParserResult         (void* pResult);
 
 private:
-    
+
     RString     vFilePath;
     FILE*       vHandle;
 
     size_t      vCursor;
     size_t      vBytesRead;
     char*       vFileBuffer;
+    void*       vParserResult;  
 };
 
 #include "RLoader.hxx"
